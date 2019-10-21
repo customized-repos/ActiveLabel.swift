@@ -23,7 +23,7 @@ struct ActiveBuilder {
         }
         
     }
-    static func createURLElements(from text: String, range: NSRange, maximumLength: Int?) -> ([ElementTuple], String) {
+    static func createURLElements(from text: String, range: NSRange, maximumLength: Int?, urlText: String = "网页链接") -> ([ElementTuple], String) {
         let type = ActiveType.url
         var text = text // 原 string
         // 用正则检查是否有 url
@@ -38,7 +38,7 @@ struct ActiveBuilder {
             matchInfos.append((webString, match.range))
         }
         
-        let trimmedWord = "网页链接"
+        let trimmedWord = urlText
         var oldRecord = 0
         var newRecord = 0
         for (webString, webRange) in matchInfos {
