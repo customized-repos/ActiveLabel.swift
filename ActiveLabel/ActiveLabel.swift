@@ -72,6 +72,16 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
     public var highlightFontSize: CGFloat? = nil {
         didSet { updateTextStorage(parseText: false) }
     }
+    private var _urlText: String?
+    /// 网页链接名称
+    open var urlText: String? {
+        set {
+           _urlText = newValue
+        }
+        get {
+            _urlText
+        }
+    }
     
     // MARK: - Computed Properties
     private var hightlightFont: UIFont? {
@@ -399,7 +409,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
         
         // 如果可用事件中包含 url 事件
         if enabledTypes.contains(.url) {
-            let tuple = ActiveBuilder.createURLElements(from: textString, range: textRange, maximumLength: urlMaximumLength)
+            let tuple = ActiveBuilder.createURLElements(from: textString, range: textRange, maximumLength: urlMaximumLength,urlText: _urlText ?? "网页链接")
             let urlElements = tuple.0
             let finalText = tuple.1
             textString = finalText
