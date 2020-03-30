@@ -266,6 +266,8 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             selectedElement = nil
         case .stationary:
             break
+        default:
+            break
         }
         
         return avoidSuperCall
